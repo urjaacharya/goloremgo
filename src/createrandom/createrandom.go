@@ -38,9 +38,13 @@ func Sentences(n int) string {
 	sentencesArray := strings.Split(sentences, ".")
 	var finalSentences string
 	for i := 0; i < n; i++ {
-		finalSentences = finalSentences + " " + sentencesArray[i]
+		if finalSentences == "" {
+			finalSentences = finalSentences + sentencesArray[i] + "."
+		} else {
+			finalSentences = finalSentences + sentencesArray[i]
+		}
 	}
-	return finalSentences
+	return finalSentences + "."
 }
 
 //Paragraphs Takes the the number from user and Returns the given number of paragraphs
@@ -48,7 +52,7 @@ func Paragraphs(numSents, numParas int) string {
 	firstParagraph := Sentences(numSents)
 	var finalParas string
 	for i := 0; i < numParas; i++ {
-		finalParas = finalParas + firstParagraph
+		finalParas = finalParas + firstParagraph + "\n\n"
 	}
 	return finalParas
 }

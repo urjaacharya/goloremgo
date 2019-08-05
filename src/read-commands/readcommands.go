@@ -2,8 +2,8 @@ package main
 
 import (
 	"createrandom"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"text/template"
 )
@@ -14,45 +14,24 @@ func check(e error) {
 	}
 }
 
-//Todo comment
-type Todo struct {
-	Name        string
-	Description string
-}
-
-//Name comment
-func Name() {
-	fmt.Printf("hey")
-}
-
-//RandomCommands word
-type RandomCommands struct {
-	RandomWords string
-}
-
-var funcs = template.FuncMap{"words": createrandom.WordArray}
+var mapToFunctions = template.FuncMap{"words": createrandom.Words,
+	"sentences":  createrandom.Sentences,
+	"paragraphs": createrandom.Paragraphs}
 
 func main() {
 	templateFile, readError := ioutil.ReadFile("./templates/sample_template.md")
 	check(readError)
-	fmt.Printf(string(templateFile))
-	// fileScanner := bufio.NewScanner(templateFile)
-
-	// var contents string
-	// for fileScanner.Scan() {
-	// 	fmt.Println(fileScanner.Text())
-	// }
-	// if err := scanner.Err(); err != nil {
-	// 	log.Fatal(err)
-
-	data := []string{"two", "three"}
-	t, err := template.New("todos").Funcs(funcs).Parse(string(templateFile))
+	templates, err := template.New("todos").Funcs(mapToFunctions).Parse(string(templateFile))
 	if err != nil {
-		fmt.Printf("hey")
 		panic(err)
 	}
-	err = t.Execute(os.Stdout, data)
-	if err != nil {
+	createdTemplate, createErr := os.Create("./templates/create_template.md")
+	if createErr != nil {
+		log.Println("Create template file: ", err)
+		return
+	}
+	executeError = templates.Execute(createdTemplate, "")
+	if executeError != nil {
 		panic(err)
 	}
 }
