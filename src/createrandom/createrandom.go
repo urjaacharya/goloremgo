@@ -1,15 +1,29 @@
 package createrandom
 
 import (
+	"io/ioutil"
 	"strings"
 )
 
-var sentences = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet sed euismod nisi porta lorem mollis aliquam. Aliquet enim tortor at auctor urna nunc id. Libero volutpat sed cras ornare arcu dui vivamus arcu felis. In dictum non consectetur a erat nam. Ut pharetra sit amet aliquam. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla."
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
 
-//WordArray test
-func WordArray(sentences string, n int) string {
+//readSentence: Read the strings from a file
+func readSentence() string {
+	sentences, err := ioutil.ReadFile("./data/sentence.txt")
+	check(err)
+	return string(sentences)
+}
+
+//Words Takes the number from user and Returns the given number of words
+func Words(n int) string {
+	sentences := readSentence()
 	words := strings.Split(sentences, " ")
-	finalWords := ""
+	var finalWords string
+	//TO DO: add check to see the user do not enter number greater than the number of words in sentences
 	for i := 0; i < n; i++ {
 		if !(strings.HasSuffix(words[i], ",") || strings.HasSuffix(words[i], ".")) {
 			finalWords = finalWords + " " + words[i]
@@ -18,26 +32,23 @@ func WordArray(sentences string, n int) string {
 	return finalWords
 }
 
-func sentenceArray(n int) []string {
+//Sentences Takes the the number from user and Returns the given number of sentences
+func Sentences(n int) string {
+	sentences := readSentence()
 	sentencesArray := strings.Split(sentences, ".")
-	var finalSentences []string
+	var finalSentences string
 	for i := 0; i < n; i++ {
-		finalSentences = append(finalSentences, sentencesArray[i])
+		finalSentences = finalSentences + " " + sentencesArray[i]
 	}
 	return finalSentences
 }
 
-func para(n int) [][]string {
-	firstPara := sentenceArray(8)
-	var finalParas [][]string
-	for i := 0; i < n; i++ {
-		finalParas = append(finalParas, firstPara)
+//Paragraphs Takes the the number from user and Returns the given number of paragraphs
+func Paragraphs(numSents, numParas int) string {
+	firstParagraph := Sentences(numSents)
+	var finalParas string
+	for i := 0; i < numParas; i++ {
+		finalParas = finalParas + firstParagraph
 	}
 	return finalParas
 }
-
-// func main() {
-// 	//word_array(10)
-// 	//sentence_array(2)
-// 	fmt.Println(para(6))
-//}
