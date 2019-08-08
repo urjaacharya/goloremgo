@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"text/template"
 )
 
@@ -19,18 +20,18 @@ var mapToFunctions = template.FuncMap{"words": createrandom.Words,
 	"paragraphs": createrandom.Paragraphs}
 
 func main() {
-	templateFile, readError := ioutil.ReadFile("./templates/sample_template.md")
+	templateFile, readError := ioutil.ReadFile(filepath.FromSlash("./templates/sample_template.md"))
 	check(readError)
 	templates, err := template.New("todos").Funcs(mapToFunctions).Parse(string(templateFile))
 	if err != nil {
 		panic(err)
 	}
-	createdTemplate, createErr := os.Create("./templates/create_template.md")
+	createdTemplate, createErr := os.Create(filepath.FromSlash("./templates/create_template.md"))
 	if createErr != nil {
 		log.Println("Create template file: ", err)
 		return
 	}
-	executeError = templates.Execute(createdTemplate, "")
+	executeError := templates.Execute(createdTemplate, "")
 	if executeError != nil {
 		panic(err)
 	}
