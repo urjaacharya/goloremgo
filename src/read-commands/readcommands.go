@@ -13,22 +13,23 @@ import (
 	"text/template"
 )
 
+func usage() {
+	fmt.Println("goloremgo USAGE")
+	fmt.Println("===============")
+	fmt.Println("-p   REQUIRED: root directory that contains all the templates to be processed.")
+	fmt.Println("-s   OPTIONAL: seed to reproduce randomly generated contents.")
+	fmt.Println("-f   OPTIONAL: specify whether to overwrite files if they already exist.")
+	fmt.Println("-h   print this usage information")
+	os.Exit(1)
+}
+
 //ReadArgs Reads user provided arguments
-func ReadArgs() (int, string, bool, bool) {
+func ReadArgs() (int, string, bool) {
 	dirPath := flag.String("p", "", "REQUIRED: root directory that contains all the templates to be processed.")
 	randSeed := flag.Int("s", 42, "OPTIONAL: seed to reproduce randomly generated contents.")
 	forceOverwrite := flag.Bool("f", false, "OPTIONAL: specify whether to overwrite files if they already exist.")
-	helpFlag := flag.Bool("h", false, "OPTIONAL: help.")
+	//flag.VisitAll(temp)
 	flag.Parse()
-	if *helpFlag {
-		fmt.Println("goloremgo USAGE")
-		fmt.Println("===============")
-		fmt.Println("-p   REQUIRED: root directory that contains all the templates to be processed.")
-		fmt.Println("-s   OPTIONAL: seed to reproduce randomly generated contents.")
-		fmt.Println("-f   OPTIONAL: specify whether to overwrite files if they already exist.")
-		fmt.Println("-h   print this usage information")
-		os.Exit(1)
-	}
 
 	if *dirPath == "" {
 		fmt.Println("ERROR: path of the root directory containing the template files is not provided.")
@@ -36,7 +37,7 @@ func ReadArgs() (int, string, bool, bool) {
 	}
 
 	rootDir := filepath.FromSlash(*dirPath)
-	return *randSeed, rootDir, *forceOverwrite, *helpFlag
+	return *randSeed, rootDir, *forceOverwrite
 }
 
 // To recursively read files in a directory
@@ -113,6 +114,7 @@ var mapToFunctions = template.FuncMap{"words": createrandom.Words,
 	"paragraphs": createrandom.Paragraphs}
 
 func main() {
-	_, rootDir, forceOverwrite, _ := ReadArgs()
+	flag.Usage = usage
+	_, rootDir, forceOverwrite := ReadArgs()
 	findFiles(rootDir, forceOverwrite)
 }
