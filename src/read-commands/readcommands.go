@@ -15,12 +15,12 @@ import (
 
 //ReadArgs Reads user provided arguments
 func ReadArgs() (int, string, bool) {
-	dirPath := flag.String("p", "", "a string")
-	randSeed := flag.Int("s", 42, "an int")
-	forceOverwrite := flag.Bool("f", false, "a bool")
+	dirPath := flag.String("p", "", "REQUIRED: root directory that contains all the templates to be processed.")
+	randSeed := flag.Int("s", 42, "OPTIONAL: seed to reproduce randomly generated contents.")
+	forceOverwrite := flag.Bool("f", false, "OPTIONAL: specify whether to overwrite files if they already exist.")
 	flag.Parse()
 	if *dirPath == "" {
-		fmt.Println("Error: File path not provided.")
+		fmt.Println("ERROR: path of the root directory containing the template files is not provided.")
 		os.Exit(1)
 	}
 
@@ -104,21 +104,4 @@ var mapToFunctions = template.FuncMap{"words": createrandom.Words,
 func main() {
 	_, rootDir, forceOverwrite := ReadArgs()
 	findFiles(rootDir, forceOverwrite)
-	//generateTemplate("templates/article/loremTemplate_article_ln2.md")
-
-	// templateFile, readError := ioutil.ReadFile(filepath.FromSlash("./templates/sample_template.md"))
-	// check(readError)
-	// templates, err := template.New("todos").Funcs(mapToFunctions).Parse(string(templateFile))
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// createdTemplate, createErr := os.Create(filepath.FromSlash("./templates/create_template.md"))
-	// if createErr != nil {
-	// 	log.Println("Create template file: ", err)
-	// 	return
-	// }
-	// executeError := templates.Execute(createdTemplate, "")
-	// if executeError != nil {
-	// 	panic(err)
-	// }
 }
