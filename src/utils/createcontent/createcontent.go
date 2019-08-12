@@ -2,22 +2,22 @@ package createcontent
 
 import (
 	"html/template"
+	"math/rand"
 	"strings"
 	"utils/data"
 )
 
 //Words Takes the number from user and Returns the given number of words
-func Words(n int) string {
+func Words(n int, sep string) string {
 	sentences := data.GetSentence()
 	words := strings.Split(sentences, " ")
-	var finalWords string
+	inds := rand.Perm(len(words))[:n]
+	finalWords := make([]string, n)
 	//TO DO: add check to see the user do not enter number greater than the number of words in sentences
 	for i := 0; i < n; i++ {
-		if !(strings.HasSuffix(words[i], ",") || strings.HasSuffix(words[i], ".")) {
-			finalWords = finalWords + " " + words[i]
-		}
+		finalWords[i] = words[inds[i]]
 	}
-	return finalWords
+	return strings.Join(finalWords[:], sep)
 }
 
 //Sentences Takes the the number from user and Returns the given number of sentences

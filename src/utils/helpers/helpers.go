@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 //Check Panics when detects errors
@@ -27,8 +28,9 @@ func Usage() {
 
 //ReadArgs Reads user provided arguments
 func ReadArgs() (int, string, bool) {
+	initialSeed := int(time.Now().UTC().UnixNano())
 	dirPath := flag.String("p", "", "REQUIRED: root directory that contains all the templates to be processed.")
-	randSeed := flag.Int("s", 42, "OPTIONAL: seed to reproduce randomly generated contents.")
+	randSeed := flag.Int("s", initialSeed, "OPTIONAL: seed to reproduce randomly generated contents.")
 	forceOverwrite := flag.Bool("f", false, "OPTIONAL: specify whether to overwrite files if they already exist.")
 
 	flag.Parse()

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"path"
 	"path/filepath"
@@ -56,10 +57,10 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 }
 
 func main() {
+	seed, dirPath, forceOverwrite := helpers.ReadArgs()
 	flag.Usage = helpers.Usage
-	_, dirPath, forceOverwrite := helpers.ReadArgs()
 	var templateFound bool
-
+	rand.Seed(int64(seed))
 	dirErr := filepath.Walk(dirPath, func(path string, info os.FileInfo, fileErr error) error {
 		if fileErr != nil {
 			return fileErr

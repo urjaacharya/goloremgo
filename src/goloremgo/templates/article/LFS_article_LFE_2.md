@@ -1,5 +1,5 @@
 ---
-title: "{{ words 2}}"
+title: "{{ words 2 " " }}"
 sents: "{{ sentences 3}}"
 ---
 
