@@ -1,8 +1,11 @@
 ---
-title: "{{ words 2 " " }}"
-sents: "{{ sentences 3}}"
+title1: "{{ words 2 " " | capFirst }}"
+date: {{ date "2014-11-12" 250 }}
+title2: "{{ words 2 " " | capEach }}"
+title3: "{{ words 2 " " | capAll }}"
+sents: "{{ sents 3}}"
 tags: ["{{words 1 ` ` }}", "{{ words 2 ` ` }}"]
 ---
 
 # Heading 1
-information: {{ paragraphs 8 2}}
+information: {{ paras 8 2}}

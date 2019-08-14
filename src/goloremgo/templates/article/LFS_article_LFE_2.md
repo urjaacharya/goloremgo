@@ -1,7 +1,7 @@
 ---
 title: "{{ words 2 " " }}"
-sents: "{{ sentences 3}}"
+sents: "{{ sents 3}}"
 ---
 
 # Heading 1
-information: {{ paragraphs 8 2}}
+information: {{ paras 8 2}}
