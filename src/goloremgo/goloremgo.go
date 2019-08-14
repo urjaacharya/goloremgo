@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"math/rand"
 	"os"
@@ -11,6 +10,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"text/template"
 	"utils/createcontent"
 	"utils/helpers"
 )
