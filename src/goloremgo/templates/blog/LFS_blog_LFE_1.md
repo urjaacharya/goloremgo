@@ -1,6 +1,6 @@
 ---
 title1: "{{ words 2 " " | capFirst }}"
-date: {{ date "2014-11-12" 250 }}
+date: {{ date "2014-11-12" 250 "Jan 2, 06" }}
 title2: "{{ words 2 " " | capEach }}"
 title3: "{{ words 2 " " | capAll }}"
 sents: "{{ sents 3}}"

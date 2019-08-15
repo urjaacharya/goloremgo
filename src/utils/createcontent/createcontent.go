@@ -55,14 +55,14 @@ func CapitalizeFirst(x string) string {
 }
 
 // Date returns a random date
-func Date(x string, n int) string {
+func Date(x string, n int, format string) string {
 	layout := "2006-01-02"
 	parsedDate, err := time.Parse(layout, x)
 	if err != nil {
 		fmt.Println(err)
 	}
 	i := rand.Intn(n)
-	dateString := (parsedDate.AddDate(0, 0, i)).Format("2006-01-02")
+	dateString := (parsedDate.AddDate(0, 0, i)).Format(format)
 	return dateString
 }
 
