@@ -19,7 +19,7 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 	dirName, fileName := filepath.Split(templatePath)
 	templateFile, readError := ioutil.ReadFile(filepath.FromSlash(templatePath))
 	helpers.Check(readError)
-	templates, err := template.New("todos").Funcs(createcontent.MapToFunctions).Parse(string(templateFile))
+	templates, err := template.New(templatePath).Funcs(createcontent.MapToFunctions).Parse(string(templateFile))
 	if err != nil {
 		panic(err)
 	}
