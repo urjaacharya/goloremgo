@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -33,18 +34,21 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 	//create fileNumInt number of templates
 	for idx := 1; idx <= fileNumber; idx++ {
 		currentPath := path.Join(dirName, (baseName + "_" + strconv.Itoa(idx) + ".md"))
-
 		_, exitsErr := os.Stat(currentPath)
-
 		if os.IsNotExist(exitsErr) || forceOverwrite {
+			var dump bytes.Buffer
+			executeError := templates.Execute(&dump, "")
+			if executeError != nil {
+				panic(executeError)
+			}
 			createdTemplate, createErr := os.Create(currentPath)
+			_, writeErr := createdTemplate.WriteString(dump.String())
+			if writeErr != nil {
+				fmt.Println("Ha Ha")
+			}
 			if createErr != nil {
 				fmt.Println("Create template file: ", createErr)
 				return
-			}
-			executeError := templates.Execute(createdTemplate, "")
-			if executeError != nil {
-				panic(executeError)
 			}
 			if !os.IsNotExist(exitsErr) {
 				fmt.Println("'" + currentPath + "' was replaced.")
