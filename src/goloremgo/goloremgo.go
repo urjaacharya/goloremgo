@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -38,9 +37,6 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 		_, exitsErr := os.Stat(currentPath)
 
 		if os.IsNotExist(exitsErr) || forceOverwrite {
-			if !os.IsNotExist(exitsErr) {
-				fmt.Println("'" + currentPath + "' already exists but will be replaced.")
-			}
 			createdTemplate, createErr := os.Create(currentPath)
 			if createErr != nil {
 				fmt.Println("Create template file: ", createErr)
@@ -50,15 +46,18 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 			if executeError != nil {
 				panic(executeError)
 			}
+			if !os.IsNotExist(exitsErr) {
+				fmt.Println("'" + currentPath + "' was replaced.")
+			}
 		} else if !os.IsNotExist(exitsErr) && !forceOverwrite {
-			fmt.Println(("'" + currentPath + "' already exists and will not be replaced."))
+			fmt.Println(("'" + currentPath + "' already exists. Use -f to replace file."))
 		}
 	}
 }
 
 func main() {
 	seed, dirPath, forceOverwrite := helpers.ReadArgs()
-	flag.Usage = helpers.Usage
+	//flag.Usage = helpers.Usage
 	var templateFound bool
 	rand.Seed(int64(seed))
 	dirErr := filepath.Walk(dirPath, func(path string, info os.FileInfo, fileErr error) error {
