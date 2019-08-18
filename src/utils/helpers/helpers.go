@@ -21,9 +21,10 @@ func Check(e error) {
 func Usage() {
 	fmt.Println("\ngoloremgo version 0.0 'hang tight' USAGE")
 	fmt.Println("========================================")
-	fmt.Println("-p   REQUIRED: root directory that contains all the templates to be processed.")
-	fmt.Println("-f   OPTIONAL: specify whether to overwrite files if they already exist.")
-	fmt.Println("-s   OPTIONAL: seed to reproduce randomly generated contents. Default is current time.")
+	fmt.Println("-p   REQUIRED: directory that contains the templates to be processed.")
+	fmt.Println("-f   OPTIONAL: overwrites files if they already exist.")
+	fmt.Println("-r   OPTIONAL: searches for templates recursively inside all sub-directories")
+	fmt.Println("-s   OPTIONAL: seed for randomly creating content. Default is current time.")
 	fmt.Println("-h   print this usage information")
 	fmt.Println("-v   version information")
 	os.Exit(1)
