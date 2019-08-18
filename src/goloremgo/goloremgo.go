@@ -73,39 +73,25 @@ func generateTemplate(templatePath string, forceOverwrite bool) {
 }
 
 func main() {
-	seed, dirPath, forceOverwrite := helpers.ReadArgs()
-	//flag.Usage = helpers.Usage
-	var templateFound bool
-	var allTemplates []string
+	seed, dirPath, forceOverwrite, recursive := helpers.ReadArgs()
 	rand.Seed(int64(seed))
-	dirErr := filepath.Walk(dirPath, func(path string, info os.FileInfo, fileErr error) error {
-		if fileErr != nil {
-			return fileErr
-		}
-
-		matchesFormat, matchErr := regexp.MatchString(`LFS_.+_\d+\.md$`, path)
-		if matchErr != nil {
-			return matchErr
-		}
-		if matchesFormat && !templateFound {
-			templateFound = true
-		}
-		if matchesFormat {
-			allTemplates = append(allTemplates, path)
-		}
-		return nil
-	})
-	helpers.Check(dirErr)
-
-	for _, myTemplatePath := range allTemplates {
-		checkTemplates(myTemplatePath)
+	var allTemplates []string
+	var templateFound bool
+	var myErr error
+	if recursive {
+		allTemplates, templateFound, myErr = helpers.GetAllTemplateNames(dirPath)
+	} else {
+		allTemplates, templateFound, myErr = helpers.GetTemplateNames(dirPath)
 	}
-
-	for _, myTemplatePath := range allTemplates {
-		generateTemplate(myTemplatePath, forceOverwrite)
-	}
-
-	if !templateFound {
-		fmt.Println("Any template not found.")
+	helpers.Check(myErr)
+	if templateFound {
+		for _, myTemplatePath := range allTemplates {
+			checkTemplates(myTemplatePath)
+		}
+		for _, myTemplatePath := range allTemplates {
+			generateTemplate(myTemplatePath, forceOverwrite)
+		}
+	} else {
+		fmt.Println("Any matching templates not found")
 	}
 }
