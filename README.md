@@ -1,1 +1,1 @@
-# generate-hugo-template
+# goloremgo
