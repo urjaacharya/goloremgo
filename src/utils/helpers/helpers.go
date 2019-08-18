@@ -55,11 +55,11 @@ func GetAllTemplateNames(p string) ([]string, bool, error) {
 }
 
 // GetTemplateNames searches only inside files and finds templates
-func GetTemplateNames(p string) ([]string, bool, error) {
+func GetTemplateNames(dirPath string) ([]string, bool, error) {
 	templateFound := false
 	templateNamePattern := `LFS_.+_\d+\.md$`
 	var allTemplates []string
-	files, err := ioutil.ReadDir(p)
+	files, err := ioutil.ReadDir(dirPath)
 	for _, file := range files {
 		matchesFormat, matchErr := regexp.MatchString(templateNamePattern, file.Name())
 		if matchErr != nil {
@@ -69,7 +69,7 @@ func GetTemplateNames(p string) ([]string, bool, error) {
 			templateFound = true
 		}
 		if matchesFormat {
-			allTemplates = append(allTemplates, file.Name())
+			allTemplates = append(allTemplates, filepath.FromSlash(dirPath+"/"+file.Name()))
 		}
 	}
 	return allTemplates, templateFound, err
