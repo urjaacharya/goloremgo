@@ -33,7 +33,7 @@ func Usage() {
 // GetAllTemplateNames searches recursively inside 'path' and finds all templates
 func GetAllTemplateNames(p string) ([]string, bool, error) {
 	templateFound := false
-	templateNamePattern := `LFS_.+_\d+\.md$`
+	templateNamePattern := `LFS_.+_\d+\.glg$`
 	var allTemplates []string
 	dirErr := filepath.Walk(p, func(path string, info os.FileInfo, fileErr error) error {
 		if fileErr != nil {
@@ -57,7 +57,7 @@ func GetAllTemplateNames(p string) ([]string, bool, error) {
 // GetTemplateNames searches only inside files and finds templates
 func GetTemplateNames(dirPath string) ([]string, bool, error) {
 	templateFound := false
-	templateNamePattern := `LFS_.+_\d+\.md$`
+	templateNamePattern := `LFS_.+_\d+\.glg$`
 	var allTemplates []string
 	files, err := ioutil.ReadDir(dirPath)
 	for _, file := range files {
@@ -93,7 +93,7 @@ func ReadArgs() (int, string, bool, bool) {
 	}
 
 	if *dirPath == "" {
-		fmt.Println("ERROR: path of the root directory containing the template files is not provided.")
+		fmt.Println("ERROR: directory path of template files not provided.")
 		os.Exit(1)
 	}
 

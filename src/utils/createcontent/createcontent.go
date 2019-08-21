@@ -3,6 +3,7 @@ package createcontent
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"strings"
 	"text/template"
 	"time"
@@ -11,11 +12,14 @@ import (
 
 //Word Takes the number from user and Returns the given number of words
 func Word(n int, sep string) string {
-	sentences := data.Terms()
-	words := strings.Split(sentences, " ")
+	nMaxWord := 30
+	if n > nMaxWord {
+		panic("number of words has to be less than " + strconv.Itoa(nMaxWord))
+	}
+	terms := data.Terms()
+	words := strings.Split(terms, " ")
 	inds := rand.Perm(len(words))[:n]
 	finalWords := make([]string, n)
-	//TO DO: add check to see the user do not enter number greater than the number of words in sentences
 	for i := 0; i < n; i++ {
 		finalWords[i] = words[inds[i]]
 	}
@@ -24,6 +28,10 @@ func Word(n int, sep string) string {
 
 //Sent Takes the the number from user and Returns the given number of sentences
 func Sent(n int) string {
+	nMaxSent := 30
+	if n > nMaxSent {
+		panic("number of sentences has to be less than " + strconv.Itoa(nMaxSent))
+	}
 	finalSentences := make([]string, n)
 	for i := 0; i < n; i++ {
 		randNum := rand.Intn(7) + 8
@@ -40,6 +48,13 @@ func Sent(n int) string {
 
 //Para Takes the the number from user and Returns the given number of paragraphs
 func Para(numSents, numParas int) string {
+	nMaxSents, nMaxParas := 25, 25
+	if numSents > nMaxSents {
+		panic("number of sentences for each paragraph has to be less than " + strconv.Itoa(nMaxSents))
+	}
+	if numParas > nMaxParas {
+		panic("number of paragraphs for each paragraph has to be less than " + strconv.Itoa(nMaxSents))
+	}
 	finalParas := make([]string, numParas)
 	for i := 0; i < numParas; i++ {
 		finalParas[i] = Sent(numSents)
