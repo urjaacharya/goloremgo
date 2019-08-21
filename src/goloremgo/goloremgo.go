@@ -16,6 +16,15 @@ import (
 )
 
 func checkTemplates(templatePath string) {
+
+	//Parse file
+	fileNumberPattern := regexp.MustCompile(`LFE_(\d+)`)
+	fileNumber, _ := strconv.Atoi((fileNumberPattern.FindStringSubmatch(templatePath))[1])
+
+	nMaxFiles := 10
+	if fileNumber >= nMaxFiles {
+		panic("The number of files to generate must be less than " + strconv.Itoa(nMaxFiles) + " in " + templatePath)
+	}
 	templateFile, readError := ioutil.ReadFile(filepath.FromSlash(templatePath))
 	helpers.Check(readError)
 	templates, err := template.New(templatePath).Funcs(createcontent.MapToFunctions).Parse(string(templateFile))
