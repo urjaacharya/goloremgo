@@ -80,12 +80,18 @@ For example, `{{ date "2014-11-12" 250 "Jan 2, 06" }}` will generate a random da
 
 #### `{{ capFirst input }}`
 
-`capFirst` will capitalize the first letter of the first word of the `input` string. For example, `{{ capFirst "apple sauce" }}` will return "Apple sauce".
+`capFirst` will capitalize the first letter of the first word of the `input` string. 
+
+For example, `{{ capFirst "apple sauce" }}` will return "Apple sauce".
 
 #### `{{ capAll input }}`
 
-`capAll` will capitalize all letters of the `input` string. For example, `{{ capAll "apple sauce" }}` will return "APPLE SAUCE".
+`capAll` will capitalize all letters of the `input` string. 
+
+For example, `{{ capAll "apple sauce" }}` will return "APPLE SAUCE".
 
 #### `{{ capEach input }}`
 
-`capEach` will capitalize each letter of the `input` string. For example, `{{ capEach "apple sauce" }}` will return "Apple Sauce".
+`capEach` will capitalize first letter of each word in the `input` string. 
+
+For example, `{{ capEach "apple sauce" }}` will return "Apple Sauce".
