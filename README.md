@@ -50,7 +50,7 @@ For example, if the template name is `LFS_blog_LFE_2.glg`, `goloremgo` will gene
 
 ### Template File Structure
 
-Basically, template files have the structure of markdown files. Examples of template files and markdown files generated from them are available in **TODO**.
+Basically, template files have the structure of markdown files. Examples of template files and markdown files generated from them are available [here](https://github.com/urjaacharya/goloremgo/tree/master/example).
 
 ### Available Functions
 
