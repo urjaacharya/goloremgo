@@ -54,38 +54,38 @@ Basically, template files have the structure of markdown files. Examples of temp
 
 ### Available Functions
 
-1. `{{ words n sep }}`
+#### `{{ words n sep }}`
 
 `words` generates random words. It needs two arguments, `n` and `sep`. `n` is an integer representing the number of words to be generated. `sep` is the character which separates the words.
 
 For example, `{{ words 5 " " }}` will generated five words separated by space.
 
-2. `{{ sents n }}`
+#### `{{ sents n }}`
 
 `sents` generates random sentences. It needs one argument, `n`. `n` is the number of sentences to be generated.
 
 For example, `{{ sents 5 }}` will generate five sentences.
 
-3. `{{ paras numSents numParas }}`
+#### `{{ paras numSents numParas }}`
 
 `paras` generates random paragraphs. It needs two arguments, `numSents` and `numParas`. `numSents` is an integer representing the number of sentences in each paragraph to be generated. `numParas` is an integer representing the total number of paragraphs to be generated. 
 
 For example, `{{ paras 3 5 }}` will generate five paragraphs each with three sentences.
 
-4. `{{ date startDate numDays format }}`
+#### `{{ date startDate numDays format }}`
 
 `date` generates a random date. It needs three arguments `startDate`, `numDays`, and `format`. `startDate`should have the format `yyyy-mm-dd`. A random date between the `startDate` and `numDays` after it (`startDate` + `numDays`) is returned. `format` represents the format of the date to be returned.
 
 For example, `{{ date "2014-11-12" 250 "Jan 2, 06" }}` will generate a random date between 2014-11-12 and 250 days after it. The returned date will have a `format` similar to Jan 2, 06.
 
-5. `{{ capFirst input }}`
+#### `{{ capFirst input }}`
 
 `capFirst` will capitalize the first letter of the first word of the `input` string. For example, `{{ capFirst "apple sauce" }}` will return "Apple sauce".
 
-6. `{{ capAll input }}`
+#### `{{ capAll input }}`
 
 `capAll` will capitalize all letters of the `input` string. For example, `{{ capAll "apple sauce" }}` will return "APPLE SAUCE".
 
-7. `{{ capEach input }}`
+#### `{{ capEach input }}`
 
 `capEach` will capitalize each letter of the `input` string. For example, `{{ capEach "apple sauce" }}` will return "Apple Sauce".
