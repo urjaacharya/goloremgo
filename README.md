@@ -6,7 +6,7 @@
 
 ### Build from source
 
-To build `goloremgo` yourself, go through the following steps. This assumes that `go` is already installed.
+To build `goloremgo` yourself, run the following commands inside the `$GOPATH/src`. This assumes that `go` is already installed.
 
 ```
 go get github.com/urjaacharya/goloremgo/
