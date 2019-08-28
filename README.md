@@ -9,9 +9,12 @@
 To build `goloremgo` yourself, go through the following steps. This assumes that `go` is already installed.
 
 ```
-go get ...
+go get github.com/urjaacharya/goloremgo/
+cd github.com/urjaacharya/goloremgo/
 go build
 ```
+
+Test the build by running `./goloremgo -v`
 
 ### Download Binaries
 
