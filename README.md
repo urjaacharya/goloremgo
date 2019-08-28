@@ -98,3 +98,7 @@ For example, `{{ capAll "apple sauce" }}` will return "APPLE SAUCE".
 `capEach` will capitalize first letter of each word in the `input` string. 
 
 For example, `{{ capEach "apple sauce" }}` will return "Apple Sauce".
+
+## Contributing
+
+If you want to report a bug or have feature requests, please create an issue. You can also send a pull request if you have made any major changes or updates.
