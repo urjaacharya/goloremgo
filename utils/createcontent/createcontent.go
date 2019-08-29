@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 	"time"
-	"utils/data"
+	"github.com/urjaacharya/goloremgo/utils/data"
 )
 
 //Word Takes the number from user and Returns the given number of words

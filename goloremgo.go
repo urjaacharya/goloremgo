@@ -11,8 +11,8 @@ import (
 	"regexp"
 	"strconv"
 	"text/template"
-	"utils/createcontent"
-	"utils/helpers"
+	"github.com/urjaacharya/goloremgo/utils/createcontent"
+	"github.com/urjaacharya/goloremgo/utils/helpers"
 )
 
 func checkTemplates(templatePath string) {
