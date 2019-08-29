@@ -35,7 +35,7 @@ where,
 
 Other available flags are:
 
-- -h  print this usage information
+- -h  print usage information
 - -v  version information
 
 ## Template Files
