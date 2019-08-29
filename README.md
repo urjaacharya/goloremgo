@@ -6,12 +6,15 @@
 
 ### Build from source
 
-To build `goloremgo` yourself, go through the following steps. This assumes that `go` is already installed.
+To build `goloremgo` yourself, run the following commands inside the `$GOPATH/src`. This assumes that `go` is already installed.
 
 ```
-go get ...
+go get github.com/urjaacharya/goloremgo/
+cd github.com/urjaacharya/goloremgo/
 go build
 ```
+
+Test the build by running `./goloremgo -v`
 
 ### Download Binaries
 
@@ -95,3 +98,7 @@ For example, `{{ capAll "apple sauce" }}` will return "APPLE SAUCE".
 `capEach` will capitalize first letter of each word in the `input` string. 
 
 For example, `{{ capEach "apple sauce" }}` will return "Apple Sauce".
+
+## Contributing
+
+If you want to report a bug or have feature requests, please create an issue. You can also send a pull request if you have made any major changes or updates.
