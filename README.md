@@ -18,7 +18,7 @@ Test the build by running `./goloremgo -v`
 
 ### Download Binaries
 
-You can download the binaries for your operating system from here.
+TODO
 
 ## Usage
 
